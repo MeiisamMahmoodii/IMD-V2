@@ -1,0 +1,4 @@
+random_seed: 42
+output_dir: experiments/results
+embedding_model: huihui-ai/Qwen2.5-7B-Instruct-abliterated-v2
+

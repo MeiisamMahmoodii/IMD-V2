@@ -1,0 +1,44 @@
+{
+  "experiments": [
+    {
+      "experiment_id": "exp_integration",
+      "file": "experiments\\results\\exp_integration.json"
+    },
+    {
+      "experiment_id": "exp_001_anchor_strategy_comparison",
+      "file": "experiments\\results\\exp_001_anchor_strategy_comparison.json"
+    },
+    {
+      "experiment_id": "exp_002_extraction_methods",
+      "file": "experiments\\results\\exp_002_extraction_methods.json"
+    },
+    {
+      "experiment_id": "exp_003_cross_dataset_alignment",
+      "file": "experiments\\results\\exp_003_cross_dataset_alignment.json"
+    },
+    {
+      "experiment_id": "exp_004_model_pairs",
+      "file": "experiments\\results\\exp_004_model_pairs.json"
+    },
+    {
+      "experiment_id": "exp_005_stability",
+      "file": "experiments\\results\\exp_005_stability.json"
+    },
+    {
+      "experiment_id": "exp_006_scalability",
+      "file": "experiments\\results\\exp_006_scalability.json"
+    },
+    {
+      "experiment_id": "exp_007_semantic_preservation",
+      "file": "experiments\\results\\exp_007_semantic_preservation.json"
+    },
+    {
+      "experiment_id": "exp_008_statistical_significance",
+      "file": "experiments\\results\\exp_008_statistical_significance.json"
+    },
+    {
+      "experiment_id": "exp_integration",
+      "file": "experiments\\results\\exp_integration.json"
+    }
+  ]
+}

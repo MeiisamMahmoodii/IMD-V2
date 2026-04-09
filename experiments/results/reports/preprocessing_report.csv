@@ -1,0 +1,6 @@
+dataset,total_seeds,avg_length,processed_path
+toxigen,1000,9.0,data\processed\toxigen_processed.json
+jigsaw,1000,9.0,data\processed\jigsaw_processed.json
+hatexplain,1000,9.0,data\processed\hatexplain_processed.json
+sbic,1000,9.0,data\processed\sbic_processed.json
+ethos,1000,9.0,data\processed\ethos_processed.json

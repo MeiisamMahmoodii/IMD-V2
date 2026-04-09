@@ -1,0 +1,11 @@
+{
+  "experiment_id": "exp_001_anchor_strategy_comparison",
+  "title": "Anchor Strategy Comparison",
+  "execution_date": "2026-04-09T08:48:43.728178+00:00",
+  "seed": 42,
+  "metrics": {
+    "frobenius_error": 0.0684,
+    "p_value": 0.0001,
+    "effect_size": 1.0
+  }
+}

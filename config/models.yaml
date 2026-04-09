@@ -1,0 +1,15 @@
+embedding:
+  primary:
+    model_id: huihui-ai/Qwen2.5-7B-Instruct-abliterated-v2
+rewriting:
+  llama_8b:
+    model_id: mlabonne/Meta-Llama-3.1-8B-Instruct-abliterated
+  qwen_7b:
+    model_id: huihui-ai/Qwen2.5-7B-Instruct-abliterated-v2
+  qwen_32b:
+    model_id: huihui-ai/Qwen3-32B-abliterated
+  mistral_12b:
+    model_id: mistral-community/Mistral-Nemo-Instruct-2407
+banned_words_extractor:
+  model_id: Qwen2.5-72B-Instruct-abliterated
+

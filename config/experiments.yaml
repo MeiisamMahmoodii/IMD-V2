@@ -1,0 +1,10 @@
+experiments:
+  exp_001_anchor_strategy_comparison: {sample_size: 1000}
+  exp_002_extraction_methods: {sample_size: 5000}
+  exp_003_cross_dataset_alignment: {sample_size: 5000}
+  exp_004_model_pairs: {sample_size: 1000}
+  exp_005_stability: {sample_size: 1000}
+  exp_006_scalability: {sample_sizes: [100,500,1000,5000,10000]}
+  exp_007_semantic_preservation: {sample_size: 900}
+  exp_008_statistical_significance: {sample_size: 5000}
+

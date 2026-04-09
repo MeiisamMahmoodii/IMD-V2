@@ -1,0 +1,7 @@
+datasets:
+  - {name: toxigen, source: hf, split: train, limit: 1000}
+  - {name: jigsaw, source: kaggle, split: train, limit: 1000}
+  - {name: hatexplain, source: hf, split: train, limit: 1000}
+  - {name: sbic, source: hf, split: train, limit: 1000}
+  - {name: ethos, source: hf, split: train, limit: 1000}
+

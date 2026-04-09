@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=65.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "isomorphic-dataset"
+version = "0.1.0"
+description = "Proving latent space isomorphism between LLMs"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Research Team", email = "research@example.com"}]
+dependencies = ["numpy>=1.24.0","scipy>=1.11.0","pandas>=2.0.0","pyyaml>=6.0","scikit-learn>=1.3.0"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4.0","pytest-cov>=4.1.0","black>=23.10.0","isort>=5.12.0","mypy>=1.6.0"]
+ml = ["torch>=2.0.0","transformers>=4.35.0","datasets>=2.14.0"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+
+[tool.pytest.ini_options]
+addopts = "-v"
+testpaths = ["tests"]
+python_files = ["test_*.py"]

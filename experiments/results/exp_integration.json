@@ -1,0 +1,10 @@
+{
+  "experiment_id": "exp_integration",
+  "alignment": {
+    "frobenius_error": 2.0023136266118,
+    "orthogonality_error": 1.19303514459901e-13,
+    "determinant": 0.9999999999965876,
+    "is_proper_rotation": true
+  },
+  "num_samples": 3
+}
