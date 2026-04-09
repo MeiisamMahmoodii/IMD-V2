@@ -19,22 +19,54 @@ if __name__ == "__main__":
         default="real",
         help="real = real HF dataset/model execution, scaffold = lightweight placeholder flow",
     )
+    parser.add_argument(
+        "--datasets",
+        default="",
+        help="Comma-separated dataset names to run (e.g. toxigen,hatexplain). Empty = all from config.",
+    )
+    parser.add_argument(
+        "--rewriters",
+        default="",
+        help="Comma-separated rewriting model keys from config/models.yaml. Empty = all.",
+    )
+    parser.add_argument(
+        "--limit",
+        type=int,
+        default=0,
+        help="Override per-dataset limit for smoke tests (0 keeps config limit).",
+    )
+    parser.add_argument(
+        "--embedding-model-id",
+        default="",
+        help="Override embedding model id for smoke tests.",
+    )
     args = parser.parse_args()
 
     cfg = ConfigManager.load_yaml("config/default.yaml")
     datasets_cfg = ConfigManager.load_yaml("config/datasets.yaml").get("datasets", [])
+    if args.datasets:
+        allowed = {x.strip() for x in args.datasets.split(",") if x.strip()}
+        datasets_cfg = [d for d in datasets_cfg if d["name"] in allowed]
+    if args.limit > 0:
+        datasets_cfg = [{**d, "limit": args.limit} for d in datasets_cfg]
     output_root = cfg.get("output_dir", "experiments/results")
     if args.mode == "real":
         from isomorphic.real_pipeline import RealPipeline
 
         models_cfg = ConfigManager.load_yaml("config/models.yaml")
-        stats = RealPipeline(models_cfg=models_cfg, output_root=output_root).run(
+        rewriting_names = [x.strip() for x in args.rewriters.split(",") if x.strip()] if args.rewriters else None
+        stats = RealPipeline(
+            models_cfg=models_cfg,
+            output_root=output_root,
+            embedding_model_id=(args.embedding_model_id or None),
+        ).run(
             datasets_cfg=datasets_cfg,
             threshold=float(cfg.get("wasserstein_threshold", 0.5)),
             min_words=int(cfg.get("generation_min_words", 8)),
             max_words=int(cfg.get("generation_max_words", 20)),
             max_attempts=int(cfg.get("generation_max_attempts", 5)),
             output_path=cfg.get("final_dataset_output", "data/processed/final_dataset.json"),
+            rewriting_model_names=rewriting_names,
         )
     else:
         PreprocessingPipeline(output_root=output_root).run(datasets_cfg)

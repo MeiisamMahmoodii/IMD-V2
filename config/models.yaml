@@ -10,6 +10,10 @@ rewriting:
     model_id: huihui-ai/Qwen3-32B-abliterated
   mistral_12b:
     model_id: mistral-community/Mistral-Nemo-Instruct-2407
+  tiny_gpt2:
+    model_id: sshleifer/tiny-gpt2
+  distilgpt2:
+    model_id: distilgpt2
 banned_words_extractor:
   model_id: Qwen2.5-72B-Instruct-abliterated
 

@@ -17,7 +17,7 @@ from isomorphic.utils.logger import ResultsLogger
 
 
 DATASET_ID_MAP = {
-    "toxigen": "toxigen/toxigen",
+    "toxigen": "skg/toxigen-data",
     "hatexplain": "hatexplain",
     "sbic": "social_bias_frames",
     "ethos": "ethos",
@@ -99,10 +99,15 @@ class HFRewriter:
 
 
 class RealPipeline:
-    def __init__(self, models_cfg: dict[str, Any], output_root: str = "experiments/results"):
+    def __init__(
+        self,
+        models_cfg: dict[str, Any],
+        output_root: str = "experiments/results",
+        embedding_model_id: str | None = None,
+    ):
         self.models_cfg = models_cfg
         self.results = ResultsLogger(output_root)
-        self.embedding_model_id = models_cfg["embedding"]["primary"]["model_id"]
+        self.embedding_model_id = embedding_model_id or models_cfg["embedding"]["primary"]["model_id"]
         self.embedding_extractor = MeanPoolingExtractor(self.embedding_model_id)
         self.banned_extractor = BannedWordsExtractor(models_cfg["banned_words_extractor"]["model_id"])
 
@@ -130,6 +135,7 @@ class RealPipeline:
         max_words: int = 20,
         max_attempts: int = 5,
         output_path: str = "data/processed/final_dataset.json",
+        rewriting_model_names: list[str] | None = None,
     ) -> dict[str, Any]:
         all_source_rows: list[dict[str, Any]] = []
         for cfg in datasets_cfg:
@@ -148,7 +154,14 @@ class RealPipeline:
 
         final_rows: list[dict[str, Any]] = []
         align_rows: list[dict[str, Any]] = []
-        for rewriter_name, spec in self.models_cfg.get("rewriting", {}).items():
+        rewriting_pool = self.models_cfg.get("rewriting", {})
+        if rewriting_model_names:
+            rewriting_pool = {
+                name: rewriting_pool[name]
+                for name in rewriting_model_names
+                if name in rewriting_pool
+            }
+        for rewriter_name, spec in rewriting_pool.items():
             model_id = spec["model_id"]
             rewriter = HFRewriter(model_id)
             source_vecs = []
