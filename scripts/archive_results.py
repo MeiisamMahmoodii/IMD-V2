@@ -1,12 +1,12 @@
 import hashlib
 import tarfile
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 root = Path("experiments/results")
 archive_dir = root / "data_archives"
 archive_dir.mkdir(parents=True, exist_ok=True)
-ts = datetime.now(UTC).strftime("%Y%m%d_%H%M%S")
+ts = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
 archive = archive_dir / f"final_results_{ts}.tar.gz"
 manifest = archive_dir / f"final_results_{ts}_manifest.sha256"
 
