@@ -102,9 +102,15 @@ def main():
         {"resolved": ["setup", "run_experiments", "stats"]},
     )
     # endregion
+    print("[IMD-V2] Step 1/3: preprocessing datasets...")
     setup()
+    print("[IMD-V2] Step 2/3: running experiments...")
     run_experiments()
+    print("[IMD-V2] Step 3/3: computing statistics...")
     stats()
+    results_dir = Path("experiments/results")
+    experiment_files = sorted(results_dir.glob("exp_*.json"))
+    print(f"[IMD-V2] Done. Generated {len(experiment_files)} experiment result files in {results_dir}.")
 
 if __name__ == "__main__":
     main()
