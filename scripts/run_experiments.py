@@ -1,19 +1,38 @@
 import importlib
+import runpy
+from pathlib import Path
+import sys
+
+ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 EXPERIMENTS = [
-"experiments.exp_001_anchor_strategy_comparison",
-"experiments.exp_002_extraction_methods",
-"experiments.exp_003_cross_dataset_alignment",
-"experiments.exp_004_model_pairs",
-"experiments.exp_005_alignment_stability",
-"experiments.exp_006_scalability",
-"experiments.exp_007_semantic_preservation",
-"experiments.exp_008_statistical_significance",
+    "exp_001_anchor_strategy_comparison",
+    "exp_002_extraction_methods",
+    "exp_003_cross_dataset_alignment",
+    "exp_004_model_pairs",
+    "exp_005_alignment_stability",
+    "exp_006_scalability",
+    "exp_007_semantic_preservation",
+    "exp_008_statistical_significance",
 ]
 
 def main():
     for exp in EXPERIMENTS:
-        importlib.import_module(exp).run()
+        module_name = f"experiments.{exp}"
+        try:
+            importlib.import_module(module_name).run()
+            continue
+        except ModuleNotFoundError:
+            pass
+
+        script_path = ROOT / "experiments" / f"{exp}.py"
+        if not script_path.exists():
+            raise FileNotFoundError(f"Experiment script not found: {script_path}")
+        namespace = runpy.run_path(str(script_path), run_name="__main__")
+        if "run" in namespace and callable(namespace["run"]):
+            namespace["run"]()
 
 if __name__ == "__main__":
     main()
