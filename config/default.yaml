@@ -4,4 +4,7 @@ embedding_model: huihui-ai/Qwen2.5-7B-Instruct-abliterated-v2
 normalize_before_distance: true
 wasserstein_threshold: 0.5
 final_dataset_output: data/processed/final_dataset.json
+generation_min_words: 8
+generation_max_words: 20
+generation_max_attempts: 5
 
